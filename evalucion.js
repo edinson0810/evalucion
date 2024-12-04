@@ -62,18 +62,21 @@ const mostrar = async () => {
     const listar = async () => {
         const usuarios = await server("usuarios");
         const respuesta = await Promise.all(
-            usuarios.map(async (materia) =>{
-        const materia_usuario = await server(`materia_usuario?userId=${materia.id}`);
+            usuarios.map(async (usuario) => {
+        const materia_usuario = await server(`materia_usuario?userId=${usuario.id}`);
         
-        return { ... materia, materia_usuario}
-            })
-        )
-        return respuesta;
+        if (materia_usuario.length > 0) {
+            return { ...usuario, materia_usuario };
         }
+       
+        return null;
+        })
+    );
+    return respuesta.filter((usuario) => usuario !== null);
+};
         
-        
-        listar().then((d) => {
-            console.log(d);
+        listar().then((usuariosMatriulados) => {
+            console.log("usuarios Matriculado en materias:", usuariosMatriulados);
             
         })
 
