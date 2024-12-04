@@ -44,7 +44,8 @@ const mostrar = async () => {
     const respuesta = await Promise.all(
         usuarios.map(async (usuarios) =>{
     const notas = await server(`notas?subjectUserId=${usuarios.id}`);
-  const promedio = notas.map(notas => notas.note/3)
+  const sumaNotas = notas.reduce((acc, nota) => acc + nota.note, 0);
+  const promedio = notas.length > 0 ? sumaNotas / notas.length : 0;
   
     return { ... usuarios, notas, promedio}
         })
