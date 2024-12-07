@@ -6,7 +6,7 @@ const respuesta = await Promise.all(
     ciudades.map(async (city) =>{
 const usuarios = await server(`usuarios?cityId=${city.id}`);
 
-return { ... city, usuarios}
+return { ...city, usuarios}
     })
 )
 return respuesta;
@@ -14,7 +14,7 @@ return respuesta;
 
 
 datos().then((a) => {
-    console.log(a);
+    console.log("Listar ciudades por cada usuario",a);
     
 })
 
@@ -34,7 +34,7 @@ return respuesta;
 
 
 cargar().then((b) => {
-    console.log(b);
+    console.log("listar materias por cada usuario",b);
     
 })
 
@@ -55,7 +55,8 @@ const mostrar = async () => {
     
     
     mostrar().then((c) => {
-        console.log(c);
+        console.log("usuarios con promedio de notas",c);
+        
         
     })
 
